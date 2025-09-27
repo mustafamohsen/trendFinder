@@ -2,7 +2,7 @@
 
 **Stay on top of trending topics on social media — all in one place.**
 
-Trend Finder collects and analyzes posts from key influencers, then sends a Slack or Discord notification when it detects new trends or product launches. This has been a complete game-changer for the Firecrawl marketing team by:
+Trend Finder collects and analyzes posts from key influencers, then sends a Slack, Discord, or Pumble notification when it detects new trends or product launches. This has been a complete game-changer for the Firecrawl marketing team by:
 
 - **Saving time** normally spent manually searching social channels
 - **Keeping you informed** of relevant, real-time conversations
@@ -29,7 +29,7 @@ Learn how to set up Trend Finder and start monitoring trends in this video!
    - Analyzes sentiment and relevance
 
 3. **Notification System** 📢
-   - When significant trends are detected, sends Slack or Discord notifications based on cron job setup
+   - When significant trends are detected, sends Slack, Discord, or Pumble notifications based on cron job setup
    - Provides context about the trend and its sources
    - Enables quick response to emerging opportunities
 
@@ -38,7 +38,7 @@ Learn how to set up Trend Finder and start monitoring trends in this video!
 - 🤖 AI-powered trend analysis using Together AI
 - 📱 Social media monitoring (Twitter/X integration)
 - 🔍 Website monitoring with Firecrawl
-- 💬 Instant Slack or Discord notifications
+- 💬 Instant Slack, Discord or Pumble notifications
 - ⏱️ Scheduled monitoring using cron jobs
 
 ## Prerequisites
@@ -49,6 +49,7 @@ Learn how to set up Trend Finder and start monitoring trends in this video!
 - Docker Compose
 - Slack workspace with webhook permissions
 - API keys for required services
+- Optionally, Pumble workspace with [incoming webhook set up](https://pumble.com/help/integrations/add-pumble-apps/incoming-webhooks-for-pumble/#creating-an-incoming-webhook)
 
 ## Environment Variables
 
@@ -70,7 +71,7 @@ FIRECRAWL_API_KEY=your_firecrawl_api_key_here
 # Required if monitoring Twitter/X trends (https://developer.x.com/)
 X_API_BEARER_TOKEN=your_twitter_api_bearer_token_here
 
-# Notification driver. Supported drivers: "slack", "discord"
+# Notification driver. Supported drivers: "slack", "discord", "pumble"
 NOTIFICATION_DRIVER=discord
 
 # Required (if NOTIFICATION_DRIVER is "slack"): Incoming Webhook URL from Slack for notifications
@@ -78,6 +79,10 @@ SLACK_WEBHOOK_URL=https://hooks.slack.com/services/YOUR/WEBHOOK/URL
 
 # Required (if NOTIFICATION_DRIVER is "discord"): Incoming Webhook URL from Discord for notifications
 DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/WEBHOOK/URL
+
+# Required (if NOTIFICATION_DRIVER is "pumble"): Incoming Webhook URL from Pumble for notifications
+PUMBLE_WEBHOOK_URL=https://api.pumble.com/workspaces/WORKSPACE-ID/incomingWebhooks/postMessage/WEBHOOK-CODE
+
 ```
 
 ## Getting Started
