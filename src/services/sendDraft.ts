@@ -46,6 +46,27 @@ async function sendDraftToSlack(draft_post: string) {
   }
 }
 
+async function sendDraftToPumble(draft_post: string) {
+  try {
+    const response = await axios.post(
+      process.env.PUMBLE_WEBHOOK_URL || "",
+      {
+        text: draft_post,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+
+    return `Success sending draft to webhook at ${new Date().toISOString()}`;
+  } catch (error) {
+    console.log("Error sending draft to Pumble webhook");
+    console.log(error);
+  }
+}
+
 export async function sendDraft(draft_post: string) {
   const notificationDriver = process.env.NOTIFICATION_DRIVER?.toLowerCase();
 
@@ -54,7 +75,10 @@ export async function sendDraft(draft_post: string) {
       return sendDraftToSlack(draft_post);
     case 'discord':
       return sendDraftToDiscord(draft_post);
+    case 'pumble':
+      return sendDraftToPumble(draft_post);
     default:
       throw new Error(`Unsupported notification driver: ${notificationDriver}`);
   }
 }
+
